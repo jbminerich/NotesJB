@@ -1,6 +1,5 @@
-const API_URL = 'http://<your_pi_ip_address>:3001';
+const API_URL = 'http://192.168.0.156:3001';
 
-// Function to fetch notes
 export const fetchNotes = async () => {
     try {
         const response = await fetch(`${API_URL}/notes`);
@@ -15,7 +14,6 @@ export const fetchNotes = async () => {
     }
 };
 
-// Function to create a new note
 export const createNote = async (note) => {
     try {
         const response = await fetch(`${API_URL}/notes`, {

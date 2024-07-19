@@ -1,28 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { fetchNotes } from './utils/apiUtils';
+import React from 'react';
 
-const NoteList = () => {
-    const [notes, setNotes] = useState([]);
-
-    useEffect(() => {
-        const getNotes = async () => {
-            try {
-                const notes = await fetchNotes();
-                setNotes(notes);
-            } catch (error) {
-                console.error('Failed to fetch notes:', error);
-            }
-        };
-
-        getNotes();
-    }, []);
-
+const NoteList = ({ notes }) => {
     return (
         <div>
             <h2>Notes</h2>
             <ul>
                 {notes.map(note => (
-                    <li key={note.id}>{note.title}</li>
+                    <li key={note._id}>{note.title}</li>
                 ))}
             </ul>
         </div>
