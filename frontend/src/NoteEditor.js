@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { TextField, Button, Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
+import MdEditor from 'react-markdown-editor-lite';
+import 'react-markdown-editor-lite/lib/index.css';
 import { createNote } from './utils/apiUtils';
 
 const NoteEditor = ({ onSave }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+
+    const handleEditorChange = ({ text }) => {
+        setContent(text);
+    };
 
     const handleSubmit = async () => {
         try {
@@ -22,23 +28,20 @@ const NoteEditor = ({ onSave }) => {
             <Typography variant="h6" gutterBottom>
                 New Note
             </Typography>
-            <TextField
-                label="Title"
+            <input
+                type="text"
+                placeholder="Title"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
-                fullWidth
-                margin="normal"
+                style={{ width: '100%', padding: '8px', marginBottom: '16px' }}
             />
-            <TextField
-                label="Content"
+            <MdEditor
+                style={{ height: '300px' }}
                 value={content}
-                onChange={e => setContent(e.target.value)}
-                fullWidth
-                margin="normal"
-                multiline
-                rows={4}
+                renderHTML={text => text}
+                onChange={handleEditorChange}
             />
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
+            <Button variant="contained" color="primary" onClick={handleSubmit} style={{ marginTop: '16px' }}>
                 Save
             </Button>
         </div>
