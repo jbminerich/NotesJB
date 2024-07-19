@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NoteList from './NoteList';
 import NoteEditor from './NoteEditor';
 import NoteDetail from './NoteDetail';
-import { fetchNotes } from './utils/apiUtils';
+import { fetchNotes, deleteNote } from './utils/apiUtils';
 import { Container, Grid, Typography } from '@mui/material';
 
 const App = () => {
@@ -30,6 +30,18 @@ const App = () => {
         setSelectedNote(note);
     };
 
+    const handleDeleteNote = async (id) => {
+        try {
+            await deleteNote(id);
+            setNotes(notes.filter(note => note._id !== id));
+            if (selectedNote && selectedNote._id === id) {
+                setSelectedNote(null);
+            }
+        } catch (error) {
+            console.error('Failed to delete note:', error);
+        }
+    };
+
     return (
         <Container>
             <Typography variant="h4" gutterBottom>
@@ -40,7 +52,7 @@ const App = () => {
                     <NoteEditor onSave={handleSaveNote} />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <NoteList notes={notes} onSelectNote={handleSelectNote} />
+                    <NoteList notes={notes} onSelectNote={handleSelectNote} onDeleteNote={handleDeleteNote} />
                     {selectedNote && <NoteDetail note={selectedNote} />}
                 </Grid>
             </Grid>

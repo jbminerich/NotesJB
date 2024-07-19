@@ -7,6 +7,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+
 // Replace <raspberry_pi_ip_address> with your Raspberry Pi's IP address
 mongoose.connect('mongodb://192.168.0.156:27017/notes', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -29,6 +30,16 @@ app.post('/notes', async (req, res) => {
     });
     await note.save();
     res.send(note);
+});
+
+app.delete('/notes/:id', async (req, res) => {
+    try {
+        const note = await Note.findByIdAndDelete(req.params.id);
+        if (!note) return res.status(404).send();
+        res.send(note);
+    } catch (error) {
+        res.status(500).send(error);
+    }
 });
 
 app.listen(3001, () => {

@@ -33,3 +33,19 @@ export const createNote = async (note) => {
         throw error;
     }
 };
+
+export const deleteNote = async (id) => {
+    try {
+        const response = await fetch(`${API_URL}/notes/${id}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Failed to delete note:', error);
+        throw error;
+    }
+};
