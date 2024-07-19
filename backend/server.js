@@ -8,7 +8,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Replace <raspberry_pi_ip_address> with your Raspberry Pi's IP address
-mongoose.connect('mongodb://<raspberry_pi_ip_address>:27017/notes', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://192.168.0.156:27017/notes', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const NoteSchema = new mongoose.Schema({
     title: String,
