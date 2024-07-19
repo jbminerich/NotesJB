@@ -34,37 +34,3 @@ app.post('/notes', async (req, res) => {
 app.listen(3001, () => {
     console.log('Server is running on port 3001');
 });
-A
-A
-A
-B
-B
-B
-B
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-
