@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TextField, Button, Typography } from '@mui/material';
 import { createNote } from './utils/apiUtils';
 
 const NoteEditor = ({ onSave }) => {
@@ -18,19 +19,28 @@ const NoteEditor = ({ onSave }) => {
 
     return (
         <div>
-            <h2>New Note</h2>
-            <input 
-                type="text" 
-                placeholder="Title" 
-                value={title} 
-                onChange={e => setTitle(e.target.value)} 
+            <Typography variant="h6" gutterBottom>
+                New Note
+            </Typography>
+            <TextField
+                label="Title"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+                fullWidth
+                margin="normal"
             />
-            <textarea 
-                placeholder="Content" 
-                value={content} 
-                onChange={e => setContent(e.target.value)} 
+            <TextField
+                label="Content"
+                value={content}
+                onChange={e => setContent(e.target.value)}
+                fullWidth
+                margin="normal"
+                multiline
+                rows={4}
             />
-            <button onClick={handleSubmit}>Save</button>
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
+                Save
+            </Button>
         </div>
     );
 };
